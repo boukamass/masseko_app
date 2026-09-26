@@ -1,0 +1,9 @@
+{
+	"appId": "com.koba.oceanguard",
+	"appName": "KOBA",
+	"webDir": "dist",
+	"server": {
+		"androidScheme": "https",
+		"cleartext": true
+	}
+}

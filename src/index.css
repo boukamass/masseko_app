@@ -1,0 +1,206 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+/* High-Visibility & Anti-Glare Outdoor Contrast Rules (WCAG AAA Standards) */
+:root {
+  color-scheme: light !important;
+  forced-color-adjust: none !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Force light scheme on all inputs, select, textarea, options, tables and buttons */
+html,
+body,
+#root,
+input,
+select,
+textarea,
+button,
+option,
+table {
+  color-scheme: light !important;
+}
+
+/* Override any system/browser forced dark mode inversion on mobile Android */
+@media (prefers-color-scheme: dark) {
+  :root,
+  html,
+  body {
+    color-scheme: light !important;
+    background-color: #e2e8f0 !important;
+    color: #020617 !important;
+  }
+
+  input,
+  select,
+  textarea,
+  option,
+  button {
+    color-scheme: light !important;
+    color: #020617 !important;
+    background-color: #ffffff !important;
+  }
+}
+
+/* ================= NATIVE MOBILE APP UX & TOUCH DISCIPLINE ================= */
+
+/* 1. Prevent web page bounce and disable browser default pull-to-refresh */
+html,
+body,
+#root {
+  height: 100%;
+  max-height: 100dvh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  overscroll-behavior: none !important;
+  overscroll-behavior-y: none !important;
+}
+
+/* 2. Native App Feel: Eliminate web tap highlights and prevent text selection on UI controls */
+* {
+  -webkit-tap-highlight-color: transparent !important;
+  touch-action: manipulation;
+}
+
+body,
+button,
+a,
+nav,
+header,
+footer,
+[role="button"] {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Allow normal native typing selection inside input elements */
+input,
+textarea {
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+  user-select: text !important;
+}
+
+/* Prevent image dragging like a web browser picture */
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* 3. Global Hidden Scrollbars (Zero Web Scrollbars anywhere) */
+::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
+}
+
+* {
+  -ms-overflow-style: none !important;  /* IE / Edge */
+  scrollbar-width: none !important;  /* Firefox */
+}
+
+/* Native inertia scrolling utility for all scrollable viewports */
+.no-scrollbar,
+.overflow-y-auto,
+.overflow-x-auto,
+.overflow-auto {
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+.no-scrollbar::-webkit-scrollbar,
+.overflow-y-auto::-webkit-scrollbar,
+.overflow-x-auto::-webkit-scrollbar,
+.overflow-auto::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Ensure all form controls and interactive elements have crisp text */
+body {
+  background-color: #e2e8f0;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+/* Sunlight / Outdoor High-Contrast Mode */
+.sunlight-mode {
+  --bg-sunlight: #ffffff;
+  --text-sunlight-primary: #020617;
+  --text-sunlight-secondary: #1e293b;
+  --border-sunlight: #475569;
+}
+
+.sunlight-mode * {
+  text-shadow: none !important;
+}
+
+/* When sunlight mode is enabled, boost contrast across cards and muted text */
+.sunlight-mode .text-slate-400,
+.sunlight-mode .text-slate-500 {
+  color: #1e293b !important;
+  font-weight: 500 !important;
+}
+
+.sunlight-mode .text-slate-600 {
+  color: #0f172a !important;
+  font-weight: 600 !important;
+}
+
+.sunlight-mode .border-slate-100,
+.sunlight-mode .border-slate-200 {
+  border-color: #94a3b8 !important;
+}
+
+.sunlight-mode .bg-slate-50,
+.sunlight-mode .bg-slate-100 {
+  background-color: #f1f5f9 !important;
+}
+
+.sunlight-mode button {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18) !important;
+}
+
+/* Leaflet Tile & Image crisp rendering fixes (Fixes Tailwind max-width conflict and blurry tiles) */
+.leaflet-container img {
+  max-width: none !important;
+  max-height: none !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+.leaflet-pane,
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-tile-container,
+.leaflet-pane > svg,
+.leaflet-pane > canvas,
+.leaflet-zoom-box,
+.leaflet-image-layer,
+.leaflet-layer {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.leaflet-tile {
+  visibility: inherit !important;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+.leaflet-container {
+  font-family: inherit;
+  outline: none;
+  background-color: #0f172a;
+}

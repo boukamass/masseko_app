@@ -1,0 +1,54 @@
+{
+  "id": "/",
+  "name": "Masseko - Protection des Tortues Marines",
+  "short_name": "Masseko",
+  "description": "Application mobile de collecte de données et nettoyage des plages de Pointe-Noire pour la sauvegarde des tortues marines.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#0A3D62",
+  "background_color": "#0A3D62",
+  "categories": ["utilities", "environment", "productivity", "social"],
+  "icons": [
+    {
+      "src": "/pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Signaler un Déchet",
+      "short_name": "Signaler",
+      "description": "Signaler un déchet sur le littoral de Pointe-Noire",
+      "url": "/?screen=report",
+      "icons": [{ "src": "/pwa-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Carte des Nids",
+      "short_name": "Carte",
+      "description": "Consulter la carte côtière et les nids protégés",
+      "url": "/?screen=map",
+      "icons": [{ "src": "/pwa-192x192.png", "sizes": "192x192" }]
+    }
+  ]
+}

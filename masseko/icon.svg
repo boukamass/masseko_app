@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A3D62"/>
+      <stop offset="50%" stop-color="#0E5A8A"/>
+      <stop offset="100%" stop-color="#1BA9C5"/>
+    </linearGradient>
+    <linearGradient id="turtleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34D399"/>
+      <stop offset="100%" stop-color="#10B981"/>
+    </linearGradient>
+    <linearGradient id="shellGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1BA9C5"/>
+      <stop offset="100%" stop-color="#0A3D62"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Background Circle / Squircle -->
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)"/>
+
+  <!-- Wave Accent -->
+  <path d="M0 380 C 120 340, 220 420, 360 370 C 440 340, 480 360, 512 370 L 512 512 L 0 512 Z" fill="#061A2B" opacity="0.4"/>
+  <path d="M0 410 C 150 370, 270 440, 390 390 C 460 360, 490 380, 512 390 L 512 512 L 0 512 Z" fill="#10B981" opacity="0.15"/>
+
+  <!-- Turtle Icon Graphic Group (Centered with 15% Safe Margin) -->
+  <g filter="url(#glow)" transform="translate(256, 240) scale(1.15)">
+    <!-- Flippers (Front) -->
+    <path d="M -70 -50 C -130 -90, -170 -40, -110 10 C -85 25, -60 0, -50 -20 Z" fill="url(#turtleGrad)"/>
+    <path d="M 70 -50 C 130 -90, 170 -40, 110 10 C 85 25, 60 0, 50 -20 Z" fill="url(#turtleGrad)"/>
+
+    <!-- Flippers (Back) -->
+    <path d="M -50 70 C -95 110, -110 145, -75 145 C -45 145, -35 110, -30 85 Z" fill="url(#turtleGrad)"/>
+    <path d="M 50 70 C 95 110, 110 145, 75 145 C 45 145, 35 110, 30 85 Z" fill="url(#turtleGrad)"/>
+
+    <!-- Turtle Head -->
+    <ellipse cx="0" cy="-105" rx="30" ry="42" fill="url(#turtleGrad)"/>
+    <!-- Turtle Eyes -->
+    <circle cx="-14" cy="-115" r="4.5" fill="#0A3D62"/>
+    <circle cx="14" cy="-115" r="4.5" fill="#0A3D62"/>
+
+    <!-- Tail -->
+    <path d="M -10 105 L 0 135 L 10 105 Z" fill="url(#turtleGrad)"/>
+
+    <!-- Main Shell (Carapace) -->
+    <ellipse cx="0" cy="20" rx="76" ry="92" fill="#061A2B" stroke="#34D399" stroke-width="8"/>
+    <ellipse cx="0" cy="20" rx="66" ry="80" fill="url(#shellGrad)"/>
+
+    <!-- Shell Scutes / Hexagonal Pattern -->
+    <!-- Central Scutes -->
+    <polygon points="0,-40 32,-20 32,20 0,40 -32,20 -32,-20" fill="none" stroke="#A7F3D0" stroke-width="4.5" stroke-linejoin="round"/>
+    <polygon points="0,40 28,55 28,80 0,92 -28,80 -28,55" fill="none" stroke="#A7F3D0" stroke-width="4" stroke-linejoin="round"/>
+    <polygon points="0,-40 25,-52 25,-70 0,-78 -25,-70 -25,-52" fill="none" stroke="#A7F3D0" stroke-width="3.5" stroke-linejoin="round"/>
+
+    <!-- Lateral Pattern Radiating Lines -->
+    <line x1="32" y1="-20" x2="62" y2="-30" stroke="#A7F3D0" stroke-width="3.5"/>
+    <line x1="32" y1="20" x2="65" y2="25" stroke="#A7F3D0" stroke-width="3.5"/>
+    <line x1="28" y1="55" x2="60" y2="68" stroke="#A7F3D0" stroke-width="3.5"/>
+    <line x1="-32" y1="-20" x2="-62" y2="-30" stroke="#A7F3D0" stroke-width="3.5"/>
+    <line x1="-32" y1="20" x2="-65" y2="25" stroke="#A7F3D0" stroke-width="3.5"/>
+    <line x1="-28" y1="55" x2="-60" y2="68" stroke="#A7F3D0" stroke-width="3.5"/>
+  </g>
+
+  <!-- Typography at bottom -->
+  <text x="256" y="475" text-anchor="middle" fill="#E2E8F0" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="34" letter-spacing="4">MASSEKO</text>
+</svg>

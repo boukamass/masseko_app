@@ -1,0 +1,11 @@
+{
+  "name": "Remix Masseko - Protection des Tortues Marines \u0026 Plages de Pointe-Noire",
+  "description": "Masseko signifie Tortue en Villi. Application mobile de collecte de données et nettoyage des plages de Pointe-Noire pour la sauvegarde des tortues marines.",
+  "requestFramePermissions": [
+    "camera",
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
