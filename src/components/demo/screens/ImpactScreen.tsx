@@ -66,9 +66,7 @@ export const ImpactScreen: React.FC<ImpactScreenProps> = ({
             </div>
           </div>
 
-          <span className="text-xs font-medium text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 shadow-2xs">
-            {currentCampaign.partner}
-          </span>
+          {/* Partner badge removed as requested */}
         </div>
 
         <ModernSelect
