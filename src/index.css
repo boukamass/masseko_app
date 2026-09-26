@@ -1,9 +1,9 @@
 @import "tailwindcss";
 @import "leaflet/dist/leaflet.css";
 
-/* High-Visibility & Anti-Glare Outdoor Contrast Rules (WCAG AAA Standards) */
+/* High-Visibility Strict Light Standards - Never Altered by Phone Dark Mode */
 :root {
-  color-scheme: light !important;
+  color-scheme: light only !important;
   forced-color-adjust: none !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -20,28 +20,8 @@ textarea,
 button,
 option,
 table {
-  color-scheme: light !important;
-}
-
-/* Override any system/browser forced dark mode inversion on mobile Android */
-@media (prefers-color-scheme: dark) {
-  :root,
-  html,
-  body {
-    color-scheme: light !important;
-    background-color: #e2e8f0 !important;
-    color: #020617 !important;
-  }
-
-  input,
-  select,
-  textarea,
-  option,
-  button {
-    color-scheme: light !important;
-    color: #020617 !important;
-    background-color: #ffffff !important;
-  }
+  color-scheme: light only !important;
+  forced-color-adjust: none !important;
 }
 
 /* ================= NATIVE MOBILE APP UX & TOUCH DISCIPLINE ================= */
@@ -51,16 +31,39 @@ html,
 body,
 #root {
   height: 100%;
+  height: 100dvh;
   max-height: 100dvh;
+  width: 100%;
   overflow: hidden;
   margin: 0;
   padding: 0;
+  position: fixed;
+  inset: 0;
   overscroll-behavior: none !important;
   overscroll-behavior-y: none !important;
+  overscroll-behavior-x: none !important;
 }
 
-/* 2. Native App Feel: Eliminate web tap highlights and prevent text selection on UI controls */
-* {
+/* 2. Safe Area Insets for Edge-to-Edge Notch & Gesture Bars */
+:root {
+  --sat: env(safe-area-inset-top, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+  --sal: env(safe-area-inset-left, 0px);
+  --sar: env(safe-area-inset-right, 0px);
+}
+
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 0px) !important;
+}
+
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px) !important;
+}
+
+/* 3. Native App Feel: Eliminate web tap highlights and prevent text selection on UI controls */
+*,
+*::before,
+*::after {
   -webkit-tap-highlight-color: transparent !important;
   touch-action: manipulation;
 }
@@ -71,40 +74,65 @@ a,
 nav,
 header,
 footer,
+div,
+span,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
 [role="button"] {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  -webkit-touch-callout: none !important;
 }
 
-/* Allow normal native typing selection inside input elements */
+/* Allow normal native typing selection inside input and textarea elements */
 input,
 textarea {
   -webkit-user-select: text !important;
   -moz-user-select: text !important;
   -ms-user-select: text !important;
   user-select: text !important;
+  -webkit-touch-callout: default !important;
+  font-size: 16px !important; /* Critical: Prevents mobile browser auto-zoom when keyboard opens */
 }
 
-/* Prevent image dragging like a web browser picture */
+/* Prevent image dragging or long-press browser save dialog */
 img {
-  -webkit-user-drag: none;
-  user-select: none;
-  -webkit-touch-callout: none;
+  -webkit-user-drag: none !important;
+  user-select: none !important;
+  -webkit-touch-callout: none !important;
+  pointer-events: none;
 }
 
-/* 3. Global Hidden Scrollbars (Zero Web Scrollbars anywhere) */
+/* Re-enable pointer events for interactive map markers and avatar buttons */
+button img,
+a img,
+.leaflet-container img,
+.interactive-img {
+  pointer-events: auto !important;
+}
+
+/* 4. Complete Scrollbar Eradication (Zero Web Scrollbars anywhere in the app) */
+*::-webkit-scrollbar,
 ::-webkit-scrollbar {
   display: none !important;
   width: 0 !important;
   height: 0 !important;
   background: transparent !important;
+  opacity: 0 !important;
 }
 
-* {
+*,
+*::before,
+*::after {
   -ms-overflow-style: none !important;  /* IE / Edge */
-  scrollbar-width: none !important;  /* Firefox */
+  scrollbar-width: none !important;  /* Firefox / Modern Chrome */
 }
 
 /* Native inertia scrolling utility for all scrollable viewports */
@@ -112,9 +140,11 @@ img {
 .overflow-y-auto,
 .overflow-x-auto,
 .overflow-auto {
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: none !important;
+  -webkit-overflow-scrolling: touch !important;
+  overscroll-behavior-y: contain !important;
+  overscroll-behavior-x: contain !important;
   scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
 }
 
 .no-scrollbar::-webkit-scrollbar,
@@ -126,48 +156,16 @@ img {
   height: 0 !important;
 }
 
+/* Tactile Native Tap Feedback */
+button:active:not(:disabled),
+[role="button"]:active:not(:disabled) {
+  opacity: 0.92;
+}
+
 /* Ensure all form controls and interactive elements have crisp text */
 body {
-  background-color: #e2e8f0;
+  background-color: #0A3D62;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-}
-
-/* Sunlight / Outdoor High-Contrast Mode */
-.sunlight-mode {
-  --bg-sunlight: #ffffff;
-  --text-sunlight-primary: #020617;
-  --text-sunlight-secondary: #1e293b;
-  --border-sunlight: #475569;
-}
-
-.sunlight-mode * {
-  text-shadow: none !important;
-}
-
-/* When sunlight mode is enabled, boost contrast across cards and muted text */
-.sunlight-mode .text-slate-400,
-.sunlight-mode .text-slate-500 {
-  color: #1e293b !important;
-  font-weight: 500 !important;
-}
-
-.sunlight-mode .text-slate-600 {
-  color: #0f172a !important;
-  font-weight: 600 !important;
-}
-
-.sunlight-mode .border-slate-100,
-.sunlight-mode .border-slate-200 {
-  border-color: #94a3b8 !important;
-}
-
-.sunlight-mode .bg-slate-50,
-.sunlight-mode .bg-slate-100 {
-  background-color: #f1f5f9 !important;
-}
-
-.sunlight-mode button {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18) !important;
 }
 
 /* Leaflet Tile & Image crisp rendering fixes (Fixes Tailwind max-width conflict and blurry tiles) */

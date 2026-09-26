@@ -63,21 +63,6 @@ export default function App() {
   const [mobileScreen, setMobileScreen] = useState<DemoScreen>('home');
   const themeMode: 'fixora' = 'fixora';
   
-  // Sunlight / Outdoor High-Contrast Readability Mode (WCAG AAA)
-  const [isSunlightMode, setIsSunlightMode] = useState<boolean>(() => {
-    return typeof localStorage !== 'undefined' ? localStorage.getItem('masseko_sunlight_mode') === 'true' : false;
-  });
-
-  const toggleSunlightMode = () => {
-    setIsSunlightMode((prev) => {
-      const next = !prev;
-      if (typeof localStorage !== 'undefined') {
-        localStorage.setItem('masseko_sunlight_mode', String(next));
-      }
-      return next;
-    });
-  };
-  
   // User Session & Modals State
   const [currentUser, setCurrentUser] = useState<UserProfile | null>(MOCK_USERS[0]);
   const [showProfileModal, setShowProfileModal] = useState<boolean>(false);
@@ -419,9 +404,9 @@ export default function App() {
   }
 
   return (
-    <div className={`h-screen h-[100dvh] w-full flex justify-center text-slate-950 font-sans selection:bg-teal-600 selection:text-white transition-colors bg-[#CBD5E1] overflow-hidden ${isSunlightMode ? 'sunlight-mode' : ''}`}>
+    <div className="h-screen h-[100dvh] w-full flex justify-center text-slate-950 font-sans transition-colors bg-[#0A3D62] sm:bg-[#072740] overflow-hidden select-none">
       {/* Mobile App Standalone Frame (100% full screen on mobile, max-w-md on desktop) */}
-      <div className={`w-full h-full sm:max-w-md flex flex-col justify-between overflow-hidden relative isolate sm:shadow-2xl transition-colors sm:border-x sm:border-slate-400 text-slate-950 ${isSunlightMode ? 'bg-white' : 'bg-[#F8FAFC]'}`}>
+      <div className="w-full h-full sm:max-w-md flex flex-col justify-between overflow-hidden relative isolate sm:shadow-2xl transition-colors sm:border-x sm:border-slate-800 text-slate-950 bg-[#F8FAFC]">
         {/* Top Bar (Status bar, network, notifications, user profile) */}
         <MobileTopBar
           isOnline={isOnline}
@@ -437,8 +422,6 @@ export default function App() {
           onOpenEducation={() => setMobileScreen('education')}
           unreadNotificationsCount={unreadNotificationsCount}
           onOpenNotifications={() => setShowNotificationsModal(true)}
-          isSunlightMode={isSunlightMode}
-          onToggleSunlightMode={toggleSunlightMode}
         />
 
         {/* Floating Non-Intrusive Notification Toast (Dynamic Island style) */}

@@ -60,8 +60,8 @@ export const NotificationsModal: React.FC<NotificationsModalProps> = ({
               <button
                 type="button"
                 onClick={onClearAll}
-                className="p-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors cursor-pointer"
-                title="Effacer l'historique"
+                className="p-1.5 rounded-lg text-slate-400 hover:text-red-600 active:scale-90 transition-transform cursor-pointer"
+                aria-label="Effacer l'historique"
               >
                 <Trash2 className="w-3.5 h-3.5" />
               </button>

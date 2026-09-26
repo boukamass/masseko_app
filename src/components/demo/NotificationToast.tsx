@@ -100,8 +100,7 @@ export const NotificationToast: React.FC<NotificationToastProps> = ({
           <button
             type="button"
             onClick={onDismiss}
-            className="p-1 rounded-full text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer shrink-0"
-            title="Fermer"
+            className="p-1 rounded-full text-slate-400 hover:text-white active:scale-90 transition-transform cursor-pointer shrink-0"
             aria-label="Fermer la notification"
           >
             <X className="w-3.5 h-3.5" />

@@ -69,8 +69,8 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           <button
             type="button"
             onClick={() => (onOpenMyReports ? onOpenMyReports() : onOpenProfile ? onOpenProfile() : setMobileScreen('auth'))}
-            className="px-2.5 py-1.5 rounded-2xl bg-teal-50 hover:bg-teal-100 text-teal-900 font-bold text-xs shadow-xs border border-teal-300 flex items-center gap-1 transition-transform active:scale-95 cursor-pointer shrink-0 whitespace-nowrap min-h-[36px]"
-            title="Mes signalements"
+            className="px-2.5 py-1.5 rounded-2xl bg-teal-50 text-teal-900 font-bold text-xs shadow-xs border border-teal-300 flex items-center gap-1 transition-transform active:scale-95 shrink-0 whitespace-nowrap min-h-[36px]"
+            aria-label="Mes signalements"
           >
             <FileText className="w-3.5 h-3.5 text-teal-700 shrink-0" />
             <span className="text-xs font-bold">{myReports.length}</span>
@@ -80,8 +80,8 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           <button
             type="button"
             onClick={() => (onOpenProfile ? onOpenProfile() : setMobileScreen('auth'))}
-            className="px-3 py-1.5 rounded-2xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold shadow-xs border border-amber-500 flex items-center gap-1.5 transition-transform hover:scale-105 active:scale-95 cursor-pointer shrink-0 whitespace-nowrap min-h-[36px]"
-            title="Mon profil & points"
+            className="px-3 py-1.5 rounded-2xl bg-amber-400 text-slate-950 font-bold shadow-xs border border-amber-500 flex items-center gap-1.5 transition-transform active:scale-95 shrink-0 whitespace-nowrap min-h-[36px]"
+            aria-label="Mon profil et éco-points"
           >
             <Award className="w-4 h-4 text-slate-950 shrink-0" />
             <span className="text-xs font-bold whitespace-nowrap">{displayPoints} pts</span>

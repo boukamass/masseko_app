@@ -156,7 +156,7 @@ export const GoogleMapView: React.FC<GoogleMapViewProps> = ({
     : [];
 
   return (
-    <div className="relative w-full h-full rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm bg-slate-900 isolate">
+    <div className="relative w-full h-full rounded-3xl overflow-hidden border border-slate-200 shadow-sm bg-slate-900 isolate">
       {/* 1. Google Maps Core Component */}
       <Map
         mapId="DEMO_MAP_ID"
@@ -278,36 +278,36 @@ export const GoogleMapView: React.FC<GoogleMapViewProps> = ({
         <button
           type="button"
           onClick={() => setMapType('roadmap')}
-          className={`px-2.5 py-1 rounded-xl text-[11px] font-semibold transition-all cursor-pointer ${
+          className={`px-2.5 py-1 rounded-xl text-[11px] font-semibold transition-all cursor-pointer active:scale-95 ${
             mapType === 'roadmap'
               ? 'bg-sky-500 text-slate-950 shadow-sm'
-              : 'text-slate-300 hover:text-white'
+              : 'text-slate-300'
           }`}
-          title="Afficher les voies, rues et pistes de Pointe-Noire"
+          aria-label="Afficher les voies, rues et pistes de Pointe-Noire"
         >
           Voies & Rues
         </button>
         <button
           type="button"
           onClick={() => setMapType('hybrid')}
-          className={`px-2.5 py-1 rounded-xl text-[11px] font-semibold transition-all cursor-pointer ${
+          className={`px-2.5 py-1 rounded-xl text-[11px] font-semibold transition-all cursor-pointer active:scale-95 ${
             mapType === 'hybrid'
               ? 'bg-teal-500 text-slate-950 shadow-sm'
-              : 'text-slate-300 hover:text-white'
+              : 'text-slate-300'
           }`}
-          title="Satellite avec superposition des axes routiers"
+          aria-label="Satellite avec superposition des axes routiers"
         >
           Hybride
         </button>
         <button
           type="button"
           onClick={() => setMapType('satellite')}
-          className={`px-2.5 py-1 rounded-xl text-[11px] font-semibold transition-all cursor-pointer ${
+          className={`px-2.5 py-1 rounded-xl text-[11px] font-semibold transition-all cursor-pointer active:scale-95 ${
             mapType === 'satellite'
               ? 'bg-emerald-500 text-slate-950 shadow-sm'
-              : 'text-slate-300 hover:text-white'
+              : 'text-slate-300'
           }`}
-          title="Vue Satellite"
+          aria-label="Vue Satellite"
         >
           Satellite
         </button>

@@ -216,7 +216,7 @@ export const ModernSelect: React.FC<ModernSelectProps> = ({
           )}
 
           {/* Options List */}
-          <div className="max-h-56 overflow-y-auto p-1.5 space-y-0.5 scrollbar-thin bg-white">
+          <div className="max-h-56 overflow-y-auto p-1.5 space-y-0.5 no-scrollbar bg-white">
             {filteredOptions.length === 0 ? (
               <div className="px-3 py-4 text-center text-xs text-slate-500 font-medium">
                 Aucun résultat trouvé

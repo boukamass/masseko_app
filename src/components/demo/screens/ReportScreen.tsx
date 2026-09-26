@@ -240,7 +240,7 @@ export const ReportScreen: React.FC<ReportScreenProps> = ({
             <span className="w-6 h-6 rounded-full bg-gradient-to-tr from-teal-600 to-emerald-600 text-white font-semibold text-xs flex items-center justify-center shadow-xs">
               {reportStep}
             </span>
-            <h3 className="font-semibold text-sm sm:text-base text-slate-900 dark:text-white">
+            <h3 className="font-semibold text-sm sm:text-base text-slate-900">
               {stepTitles[reportStep - 1]}
             </h3>
           </div>
@@ -256,8 +256,8 @@ export const ReportScreen: React.FC<ReportScreenProps> = ({
                   "Bika foto ya mbote mpe tubila bisika nge kele na masa."
                 )
               }
-              className="w-8 h-8 rounded-xl bg-teal-50 text-teal-800 hover:bg-teal-100 transition-colors cursor-pointer flex items-center justify-center border border-teal-200"
-              title="Écouter le guide vocal"
+              className="w-8 h-8 rounded-xl bg-teal-50 text-teal-800 active:scale-90 transition-transform cursor-pointer flex items-center justify-center border border-teal-200"
+              aria-label="Écouter le guide vocal"
             >
               <Volume2 className="w-4 h-4" />
             </button>

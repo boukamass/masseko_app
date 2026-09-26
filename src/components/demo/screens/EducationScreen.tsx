@@ -249,12 +249,12 @@ export const EducationScreen: React.FC<EducationScreenProps> = ({
           <button
             type="button"
             onClick={playAudioSummary}
-            className={`flex items-center gap-1 text-[10px] font-extrabold px-2.5 py-1 rounded-full border transition-all cursor-pointer whitespace-nowrap shrink-0 ${
+            className={`flex items-center gap-1 text-[10px] font-extrabold px-2.5 py-1 rounded-full border transition-all cursor-pointer whitespace-nowrap shrink-0 active:scale-95 ${
               audioPlaying
                 ? 'bg-emerald-600 text-white border-emerald-500 animate-pulse'
-                : 'bg-emerald-50 text-emerald-900 border-emerald-300 hover:bg-emerald-100'
+                : 'bg-emerald-50 text-emerald-900 border-emerald-300'
             }`}
-            title="Écouter le guide vocal (Français / Lingala / Kituba)"
+            aria-label="Écouter le guide vocal (Français / Lingala / Kituba)"
           >
             {audioPlaying ? <Volume2 className="w-3 h-3 shrink-0" /> : <VolumeX className="w-3 h-3 shrink-0" />}
             <span className="whitespace-nowrap">{audioPlaying ? 'Lecture Audio...' : 'Audio Vocal'}</span>

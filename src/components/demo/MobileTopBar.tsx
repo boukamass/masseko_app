@@ -16,8 +16,6 @@ interface MobileTopBarProps {
   onOpenEducation?: () => void;
   unreadNotificationsCount?: number;
   onOpenNotifications?: () => void;
-  isSunlightMode?: boolean;
-  onToggleSunlightMode?: () => void;
 }
 
 export const MobileTopBar: React.FC<MobileTopBarProps> = ({
@@ -30,11 +28,9 @@ export const MobileTopBar: React.FC<MobileTopBarProps> = ({
   onOpenAuth,
   unreadNotificationsCount = 0,
   onOpenNotifications,
-  isSunlightMode = false,
-  onToggleSunlightMode,
 }) => {
   return (
-    <div className="px-3.5 py-2.5 border-b flex items-center justify-between text-xs z-30 select-none transition-colors bg-white border-slate-300 text-slate-950 shadow-xs shrink-0 w-full">
+    <header className="px-3.5 pt-[calc(0.625rem+env(safe-area-inset-top,0px))] pb-2.5 border-b flex items-center justify-between text-xs z-30 select-none transition-colors bg-white border-slate-300 text-slate-950 shadow-xs shrink-0 w-full">
       {/* Brand & City */}
       <div className="flex items-center gap-1.5">
         <TurtleIcon className="w-5 h-5 text-emerald-700 shrink-0" />
@@ -44,23 +40,6 @@ export const MobileTopBar: React.FC<MobileTopBarProps> = ({
 
       {/* Controls & Status */}
       <div className="flex items-center gap-1.5">
-        {/* Quick Toggle: Mode Plein Soleil / Haute Visibilité Plage */}
-        {onToggleSunlightMode && (
-          <button
-            type="button"
-            onClick={onToggleSunlightMode}
-            className={`w-8 h-8 rounded-full flex items-center justify-center transition-all shrink-0 cursor-pointer border ${
-              isSunlightMode
-                ? 'bg-amber-400 text-slate-950 border-amber-500 shadow-md ring-2 ring-amber-300'
-                : 'bg-slate-100 hover:bg-slate-200 text-slate-800 border-slate-300'
-            }`}
-            title={isSunlightMode ? 'Mode Plein Soleil Actif (WCAG AAA)' : 'Activer Mode Plein Soleil (Haute visibilité)'}
-            aria-label="Mode Plein Soleil"
-          >
-            <Sun className={`w-4 h-4 shrink-0 ${isSunlightMode ? 'text-slate-950 font-bold' : 'text-slate-700'}`} />
-          </button>
-        )}
-
         {/* Offline / Online Network Indicator */}
         <button
           type="button"
@@ -71,16 +50,12 @@ export const MobileTopBar: React.FC<MobileTopBarProps> = ({
               setIsOnline(false);
             }
           }}
-          className={`px-2.5 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 transition-all active:scale-95 whitespace-nowrap shrink-0 cursor-pointer shadow-xs min-h-[34px] border ${
+          className={`px-2.5 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 transition-all active:scale-95 whitespace-nowrap shrink-0 shadow-xs min-h-[34px] border ${
             isOnline
-              ? 'bg-emerald-800 hover:bg-emerald-900 text-white border-emerald-900'
-              : 'bg-amber-400 hover:bg-amber-300 text-slate-950 border-amber-600'
+              ? 'bg-emerald-800 text-white border-emerald-900'
+              : 'bg-amber-400 text-slate-950 border-amber-600'
           }`}
-          title={
-            isOnline
-              ? 'Réseau 4G actif (Cliquer pour basculer en mode Hors-ligne terrain)'
-              : 'Mode Hors-ligne terrain (Cliquer pour synchroniser en 4G)'
-          }
+          aria-label={isOnline ? 'Réseau 4G actif' : 'Mode Hors-ligne terrain'}
         >
           {isOnline ? (
             <>
@@ -99,9 +74,8 @@ export const MobileTopBar: React.FC<MobileTopBarProps> = ({
         <button
           type="button"
           onClick={onOpenNotifications}
-          className="relative w-8 h-8 rounded-full flex items-center justify-center transition-colors shrink-0 cursor-pointer bg-slate-100 text-slate-900 hover:bg-slate-200 border border-slate-300"
-          title="Notifications de collecte"
-          aria-label="Notifications"
+          className="relative w-8 h-8 rounded-full flex items-center justify-center transition-colors shrink-0 active:scale-90 bg-slate-100 text-slate-900 border border-slate-300"
+          aria-label="Notifications de collecte"
         >
           <Bell className="w-4 h-4 shrink-0 text-slate-800" />
           {unreadNotificationsCount > 0 && (
@@ -116,9 +90,8 @@ export const MobileTopBar: React.FC<MobileTopBarProps> = ({
           <button
             type="button"
             onClick={onOpenProfile}
-            className="w-8 h-8 rounded-full bg-teal-700 text-white text-xs font-bold flex items-center justify-center shrink-0 hover:scale-105 active:scale-95 transition-transform cursor-pointer shadow-xs border border-teal-800"
-            title={currentUser.fullName}
-            aria-label="Mon profil"
+            className="w-8 h-8 rounded-full bg-teal-700 text-white text-xs font-bold flex items-center justify-center shrink-0 active:scale-90 transition-transform shadow-xs border border-teal-800"
+            aria-label={`Profil de ${currentUser.fullName}`}
           >
             {currentUser.fullName.charAt(0)}
           </button>
@@ -126,14 +99,13 @@ export const MobileTopBar: React.FC<MobileTopBarProps> = ({
           <button
             type="button"
             onClick={onOpenAuth}
-            className="w-8 h-8 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center shrink-0 hover:scale-105 active:scale-95 transition-transform cursor-pointer border border-slate-300"
-            title="Connexion"
+            className="w-8 h-8 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center shrink-0 active:scale-90 transition-transform border border-slate-300"
             aria-label="Connexion"
           >
             <User className="w-4 h-4" />
           </button>
         )}
       </div>
-    </div>
+    </header>
   );
 };

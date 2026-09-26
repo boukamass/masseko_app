@@ -522,7 +522,7 @@ export const MapScreen: React.FC<MapScreenProps> = ({
                     type="button"
                     onClick={() => setHasArrived(true)}
                     className="h-7.5 px-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-medium text-[11px] shadow-sm flex items-center gap-1 cursor-pointer active:scale-95 transition-all whitespace-nowrap"
-                    title="Simuler l'arrivée du collecteur à moins de 15m"
+                    aria-label="Simuler l'arrivée du collecteur à moins de 15m"
                   >
                     <span>Simuler Arrivée</span>
                   </button>
@@ -556,24 +556,24 @@ export const MapScreen: React.FC<MapScreenProps> = ({
           <button
             type="button"
             onClick={handleResetOverview}
-            className="w-8 h-8 rounded-xl bg-white text-slate-800 border border-slate-300 shadow-md flex items-center justify-center transition-all cursor-pointer active:scale-95 hover:bg-slate-50"
-            title="Recentrer"
+            className="w-8 h-8 rounded-xl bg-white text-slate-800 border border-slate-300 shadow-md flex items-center justify-center transition-all cursor-pointer active:scale-90"
+            aria-label="Recentrer"
           >
             <Navigation className="w-4 h-4 text-blue-700" />
           </button>
           <button
             type="button"
             onClick={handleZoomIn}
-            className="w-8 h-8 rounded-xl bg-white text-slate-800 border border-slate-300 shadow-md flex items-center justify-center transition-all cursor-pointer active:scale-95 hover:bg-slate-50"
-            title="Zoomer"
+            className="w-8 h-8 rounded-xl bg-white text-slate-800 border border-slate-300 shadow-md flex items-center justify-center transition-all cursor-pointer active:scale-90"
+            aria-label="Zoomer"
           >
             <Plus className="w-4 h-4" />
           </button>
           <button
             type="button"
             onClick={handleZoomOut}
-            className="w-8 h-8 rounded-xl bg-white text-slate-800 border border-slate-300 shadow-md flex items-center justify-center transition-all cursor-pointer active:scale-95 hover:bg-slate-50"
-            title="Dézoomer"
+            className="w-8 h-8 rounded-xl bg-white text-slate-800 border border-slate-300 shadow-md flex items-center justify-center transition-all cursor-pointer active:scale-90"
+            aria-label="Dézoomer"
           >
             <Minus className="w-4 h-4" />
           </button>
@@ -637,8 +637,8 @@ export const MapScreen: React.FC<MapScreenProps> = ({
               <button
                 type="button"
                 onClick={() => setSelectedMapPoint(null)}
-                className="w-7 h-7 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center cursor-pointer transition-colors shrink-0"
-                title="Fermer l'aperçu"
+                className="w-7 h-7 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center cursor-pointer active:scale-90 transition-transform shrink-0"
+                aria-label="Fermer l'aperçu"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -794,14 +794,14 @@ export const MapScreen: React.FC<MapScreenProps> = ({
       {/* 5. FULL PHOTO INSPECTION MODAL */}
       {inspectingPhotoReport && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-3.5 bg-black/80 backdrop-blur-xs animate-in fade-in duration-150">
-          <div className="relative w-full max-w-sm flex flex-col bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden text-slate-900 dark:text-white">
+          <div className="relative w-full max-w-sm flex flex-col bg-white rounded-3xl border border-slate-200 shadow-2xl overflow-hidden text-slate-900">
             {/* Modal Header */}
-            <div className="p-3.5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-slate-950">
+            <div className="p-3.5 border-b border-slate-100 flex items-center justify-between bg-slate-50">
               <div className="min-w-0">
-                <h3 className="font-semibold text-sm text-slate-900 dark:text-white truncate">
+                <h3 className="font-semibold text-sm text-slate-900 truncate">
                   {inspectingPhotoReport.locationName}
                 </h3>
-                <p className="text-xs font-normal text-slate-500 dark:text-slate-400 truncate">
+                <p className="text-xs font-normal text-slate-500 truncate">
                   Photo {activePhotoIndex + 1} sur {filteredReports.length}
                 </p>
               </div>
@@ -812,7 +812,8 @@ export const MapScreen: React.FC<MapScreenProps> = ({
                   setInspectingPhotoReport(null);
                   setPhotoZoomLevel(1);
                 }}
-                className="w-8 h-8 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 flex items-center justify-center cursor-pointer"
+                className="w-8 h-8 rounded-xl bg-slate-100 text-slate-600 hover:bg-slate-200 flex items-center justify-center cursor-pointer active:scale-90 transition-transform"
+                aria-label="Fermer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -853,13 +854,13 @@ export const MapScreen: React.FC<MapScreenProps> = ({
                 </button>
               </div>
 
-              <p className="text-xs font-normal text-slate-600 dark:text-slate-300 leading-relaxed">
+              <p className="text-xs font-normal text-slate-600 leading-relaxed">
                 {inspectingPhotoReport.description || "Déchets plastiques signalés sur le littoral."}
               </p>
             </div>
 
             {/* Modal Footer */}
-            <div className="p-3 border-t border-slate-100 dark:border-slate-800 flex items-center gap-2 bg-slate-50 dark:bg-slate-950">
+            <div className="p-3 border-t border-slate-100 flex items-center gap-2 bg-slate-50">
               <button
                 type="button"
                 onClick={() => {
@@ -898,8 +899,8 @@ export const MapScreen: React.FC<MapScreenProps> = ({
               <button
                 type="button"
                 onClick={() => setHasArrived(false)}
-                className="p-1.5 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
-                title="Fermer"
+                className="p-1.5 rounded-xl text-slate-400 active:scale-90 transition-transform cursor-pointer"
+                aria-label="Fermer"
               >
                 <X className="w-4 h-4" />
               </button>

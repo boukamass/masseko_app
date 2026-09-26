@@ -1,6 +1,6 @@
-# 📱 Guide : Comment générer un vrai fichier APK Android dans VS Code pour KOBA
+# 📱 Guide : Comment générer le fichier APK Android (masseko.apk) dans VS Code pour MASSEKO
 
-Ce guide pas-à-pas vous explique comment compiler votre application **KOBA** en fichier **APK installable (.apk)** sur n'importe quel smartphone Android depuis votre terminal **VS Code**.
+Ce guide pas-à-pas vous explique comment compiler votre application **MASSEKO** en fichier **APK installable nommé `masseko.apk`** avec **son propre logo/icône officiel** sur n'importe quel smartphone Android depuis votre terminal **VS Code**.
 
 ---
 
@@ -24,23 +24,24 @@ Dans le terminal VS Code, exécutez :
 npm install
 ```
 
-### Étape 3 : Compiler l'application Web & synchroniser avec Android
-Exécutez la commande suivante :
+### Étape 3 : Générer les icônes & synchroniser
+Exécutez :
 ```bash
 npm run cap:sync
 ```
-*Cette commande va compiler le code React dans le dossier `dist/` puis copier les assets dans le projet Android.*
+*Cette commande génère automatiquement toutes les icônes Masseko (adaptatives, legacy et splash), compile le code web et synchronise avec Android.*
 
 ---
 
-## 📦 Option A : Générer l'APK directement depuis le terminal VS Code (Sans ouvrir Android Studio)
+## 📦 Option A : Générer l'APK directement depuis le terminal VS Code (Recommandé)
 
 Dans le terminal de VS Code, tapez simplement :
 
-### 👉 Pour un APK de test / debug (le plus rapide) :
+### 👉 Pour générer `masseko.apk` :
 ```bash
 npm run build:apk
 ```
+
 *Ou manuellement :*
 - **Sur Linux / macOS :**
   ```bash
@@ -56,15 +57,19 @@ npm run build:apk
   ```
 
 ### 📍 Où trouver votre fichier APK généré ?
-Une fois la compilation terminée, votre fichier APK se trouve ici :
+Une fois la compilation terminée, votre fichier APK s'appelle **`masseko.apk`** et se trouve ici :
 ```
-android/app/build/outputs/apk/debug/app-debug.apk
+masseko.apk                                            (à la racine du projet)
+android/app/build/outputs/apk/debug/masseko.apk       (dans le dossier Android)
 ```
-Vous pouvez copier ce fichier `app-debug.apk` directement sur votre téléphone Android par câble USB, WhatsApp, Telegram, Google Drive ou email pour l'installer et le tester !
+Vous pouvez copier ce fichier `masseko.apk` directement sur votre téléphone Android par câble USB, WhatsApp, Telegram, Google Drive ou email pour l'installer.
+
+### 🐢 Icône sur votre téléphone après installation
+L'icône installée sur votre smartphone est automatiquement **le logo officiel MASSEKO** (la tortue marine émeraude stylisée sur fond bleu océan profond), parfaitement compatible avec tous les lanceurs d'applications (Pixel, Samsung One UI, Xiaomi, etc.) grâce au support complet des icônes adaptatives Android.
 
 ---
 
-## 📱 Option B : Ouvrir le projet dans Android Studio (Recommandé pour signer l'APK Release)
+## 📱 Option B : Ouvrir le projet dans Android Studio (Pour signer l'APK Release)
 
 Si vous préférez l'interface graphique d'Android Studio :
 
@@ -76,28 +81,26 @@ Si vous préférez l'interface graphique d'Android Studio :
 3. Attendez la synchronisation Gradle en bas à droite.
 4. Dans le menu du haut d'Android Studio :
    - Cliquez sur **Build** > **Build Bundle(s) / APK(s)** > **Build APK(s)**.
-5. Une notification apparaîtra : cliquez sur **"locate"** pour récupérer votre fichier `app-debug.apk` ou `app-release.apk`.
+5. Une notification apparaîtra : cliquez sur **"locate"** pour récupérer votre fichier `masseko.apk`.
 
 ---
 
-## 🔒 Option C : Générer un APK Release optimisé & signé pour la production
+## 🔒 Option C : Générer un APK Release de production
 
-Pour générer un APK optimisé :
+Pour générer un APK Release :
 ```bash
-cd android
-./gradlew assembleRelease
-# Sur Windows : .\gradlew.bat assembleRelease
+npm run build:apk:release
 ```
-Le fichier se trouvera dans :
+Le fichier généré sera :
 ```
-android/app/build/outputs/apk/release/app-release-unsigned.apk
+masseko.apk                                            (à la racine du projet)
+android/app/build/outputs/apk/release/masseko.apk     (dans le dossier Android)
 ```
 
 ---
 
-## ⚙️ Configuration du projet Capacitor
-- **App ID (Package Name) :** `com.koba.oceanguard`
-- **Nom de l'application :** `KOBA`
+## ⚙️ Informations sur la configuration
+- **Nom de l'application :** `Masseko`
+- **Nom du fichier APK :** `masseko.apk`
+- **Icône de l'application :** Logo officiel Masseko (Tortue Marine Villi)
 - **Fichier de configuration :** `capacitor.config.ts`
-
-Toutes les configurations sont prêtes !

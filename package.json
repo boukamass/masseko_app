@@ -5,15 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
-    "build": "vite build && cp -r masseko dist",
+    "build": "node scripts/generate-icons.js && vite build && cp -r masseko dist",
     "preview": "vite preview",
     "clean": "rm -rf masseko dist server.js",
     "generate:icons": "node scripts/generate-icons.js",
     "lint": "tsc --noEmit",
     "cap:sync": "npm run build && npx cap sync android",
     "cap:open": "npx cap open android",
-    "build:apk": "npm run build && npx cap sync android && cd android && ./gradlew assembleDebug",
-    "build:apk:release": "npm run build && npx cap sync android && cd android && ./gradlew assembleRelease"
+    "build:apk": "npm run build && npx cap sync android && cd android && ./gradlew assembleDebug && node -e \"try{require('fs').copyFileSync('app/build/outputs/apk/debug/masseko.apk','../masseko.apk');console.log('Fichier APK généré avec succès: masseko.apk')}catch(e){}\"",
+    "build:apk:release": "npm run build && npx cap sync android && cd android && ./gradlew assembleRelease && node -e \"try{require('fs').copyFileSync('app/build/outputs/apk/release/masseko.apk','../masseko.apk');console.log('Fichier APK Release généré avec succès: masseko.apk')}catch(e){}\""
   },
   "dependencies": {
     "@capacitor/android": "^8.5.2",

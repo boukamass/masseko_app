@@ -7,9 +7,11 @@ import {
   AlertTriangle,
   QrCode,
   ShieldCheck,
+  Search,
   ChevronRight
 } from 'lucide-react';
 import { DemoScreen } from '../MobileBottomNav';
+import { mockLots } from '../../../data/mockPointeNoireData';
 
 interface ScanScreenProps {
   scanScreenMode: 'qr_scanner' | 'type_recognition';
@@ -80,31 +82,39 @@ export const ScanScreen: React.FC<ScanScreenProps> = ({
   setScannedLotId,
   themeMode,
 }) => {
-  const isFixora = themeMode === 'fixora';
   const [selectedPolymer, setSelectedPolymer] = useState<PolymerGuide>(POLYMER_DATA[0]);
+  const [manualLotInput, setManualLotInput] = useState<string>('');
+
+  const handleManualSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (manualLotInput.trim()) {
+      setScannedLotId(manualLotInput.trim().toUpperCase());
+      setMobileScreen('lot');
+    }
+  };
 
   return (
-    <div className="space-y-3 pb-3">
+    <div className="space-y-3 pb-3 select-none">
       {/* 1. Header with Mode Switcher */}
       <div className="flex items-center justify-between pt-1 gap-2">
         <div className="min-w-0">
-          <h2 className="font-semibold text-base sm:text-lg text-slate-900 leading-tight truncate">
+          <h2 className="font-bold text-base sm:text-lg text-slate-950 leading-tight truncate">
             Scan & Diagnostic Plastique
           </h2>
-          <span className="text-xs text-slate-500 font-normal block truncate">
+          <span className="text-xs text-slate-600 font-medium block truncate">
             Traçabilité des lots et guide des matières
           </span>
         </div>
 
         {/* Mode Switch Pills */}
-        <div className="flex items-center p-0.5 bg-slate-100 rounded-2xl text-xs font-medium shrink-0 border border-slate-200">
+        <div className="flex items-center p-0.5 bg-slate-100 rounded-2xl text-xs font-bold shrink-0 border border-slate-300">
           <button
             type="button"
             onClick={() => setScanScreenMode('qr_scanner')}
             className={`px-3 py-1.5 rounded-xl transition-all cursor-pointer whitespace-nowrap shrink-0 min-h-[34px] ${
               scanScreenMode === 'qr_scanner'
-                ? 'bg-gradient-to-r from-teal-600 to-emerald-600 text-white font-medium shadow-xs'
-                : 'text-slate-600 font-normal'
+                ? 'bg-gradient-to-r from-teal-700 to-emerald-700 text-white font-bold shadow-xs'
+                : 'text-slate-700'
             }`}
           >
             Scanner QR
@@ -114,8 +124,8 @@ export const ScanScreen: React.FC<ScanScreenProps> = ({
             onClick={() => setScanScreenMode('type_recognition')}
             className={`px-3 py-1.5 rounded-xl transition-all cursor-pointer whitespace-nowrap shrink-0 min-h-[34px] ${
               scanScreenMode === 'type_recognition'
-                ? 'bg-gradient-to-r from-teal-600 to-emerald-600 text-white font-medium shadow-xs'
-                : 'text-slate-600 font-normal'
+                ? 'bg-gradient-to-r from-teal-700 to-emerald-700 text-white font-bold shadow-xs'
+                : 'text-slate-700'
             }`}
           >
             Résines
@@ -126,7 +136,8 @@ export const ScanScreen: React.FC<ScanScreenProps> = ({
       {/* Mode 1: QR Scanner */}
       {scanScreenMode === 'qr_scanner' ? (
         <div className="space-y-3 animate-in fade-in">
-          <div className="relative w-full h-72 bg-black rounded-3xl overflow-hidden border border-teal-500/30 shadow-inner flex flex-col items-center justify-between p-3.5 text-white">
+          {/* Scanner Viewfinder Box */}
+          <div className="relative w-full h-72 bg-slate-950 rounded-3xl overflow-hidden border border-teal-500/40 shadow-inner flex flex-col items-center justify-between p-3.5 text-white">
             {/* Real QR graphic */}
             <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
               <img
@@ -142,19 +153,19 @@ export const ScanScreen: React.FC<ScanScreenProps> = ({
               <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-teal-400 rounded-tr-md"></div>
               <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-teal-400 rounded-bl-md"></div>
               <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-teal-400 rounded-br-md"></div>
-              <span className="text-[11px] font-medium bg-gradient-to-r from-teal-600 to-emerald-600 text-white px-3 py-1 rounded-full shadow-md animate-pulse whitespace-nowrap">
-                Détection MASSEKO-2026-000127
+              <span className="text-[11px] font-bold bg-gradient-to-r from-teal-600 to-emerald-600 text-white px-3 py-1 rounded-full shadow-md animate-pulse whitespace-nowrap">
+                Détection : MASSEKO-2026-000127
               </span>
             </div>
 
             {/* Bottom Scanned Result Overlay */}
             <div className="relative z-10 w-full bg-black/90 backdrop-blur-md p-3 rounded-2xl border border-slate-700 text-xs flex items-center justify-between gap-2 shadow-lg">
               <div className="min-w-0">
-                <span className="font-semibold text-teal-300 block text-xs sm:text-sm truncate">
+                <span className="font-bold text-teal-300 block text-xs sm:text-sm truncate">
                   Lot #MASSEKO-2026-000127
                 </span>
-                <span className="text-xs text-slate-300 font-normal block truncate mt-0.5">
-                  183.5 kg PET • Songolo
+                <span className="text-xs text-slate-300 font-medium block truncate mt-0.5">
+                  183.5 kg PET • Côte Sauvage & Songolo
                 </span>
               </div>
               <button
@@ -163,13 +174,38 @@ export const ScanScreen: React.FC<ScanScreenProps> = ({
                   setScannedLotId('MASSEKO-2026-000127');
                   setMobileScreen('lot');
                 }}
-                className="h-10 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 active:scale-95 text-white text-xs font-medium px-3.5 rounded-xl shadow-xs flex items-center gap-1.5 shrink-0 cursor-pointer whitespace-nowrap"
+                className="h-10 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 active:scale-95 text-white text-xs font-bold px-3.5 rounded-xl shadow-xs flex items-center gap-1.5 shrink-0 cursor-pointer whitespace-nowrap"
               >
-                <span className="whitespace-nowrap">Ouvrir Fiche Lot</span>
+                <span className="whitespace-nowrap">Ouvrir Lot</span>
                 <ArrowRight className="w-4 h-4 shrink-0" />
               </button>
             </div>
           </div>
+
+          {/* Manual Entry Fallback */}
+          <form onSubmit={handleManualSearch} className="p-3 bg-white rounded-3xl border border-slate-300 shadow-2xs space-y-2">
+            <span className="text-xs font-bold text-slate-950 block">
+              Recherche manuelle de lot :
+            </span>
+            <div className="flex items-center gap-2">
+              <div className="relative flex-1">
+                <input
+                  type="text"
+                  value={manualLotInput}
+                  onChange={(e) => setManualLotInput(e.target.value)}
+                  placeholder="Ex: MASSEKO-2026-000127"
+                  className="w-full h-10 px-3 rounded-xl bg-slate-50 border border-slate-300 text-xs font-bold text-slate-950 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-teal-600"
+                />
+              </div>
+              <button
+                type="submit"
+                className="h-10 px-3.5 bg-slate-900 hover:bg-slate-800 active:scale-95 text-white rounded-xl text-xs font-bold flex items-center gap-1 shrink-0 cursor-pointer"
+              >
+                <Search className="w-3.5 h-3.5" />
+                <span>Vérifier</span>
+              </button>
+            </div>
+          </form>
         </div>
       ) : (
         /* Mode 2: Quick Resin Guide */
@@ -183,19 +219,19 @@ export const ScanScreen: React.FC<ScanScreenProps> = ({
                   key={poly.id}
                   type="button"
                   onClick={() => setSelectedPolymer(poly)}
-                  className={`p-3 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between min-h-[75px] shadow-xs ${
+                  className={`p-3 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between min-h-[75px] shadow-xs active:scale-95 ${
                     isSelected
-                      ? 'border-teal-600 bg-teal-50/90 ring-2 ring-teal-500/20'
-                      : 'bg-white hover:bg-slate-50 border-slate-200 text-slate-900'
+                      ? 'border-teal-700 bg-teal-50 ring-2 ring-teal-500/30'
+                      : 'bg-white hover:bg-slate-50 border-slate-300 text-slate-950'
                   }`}
                 >
                   <div className="flex items-center justify-between w-full">
-                    <span className="font-semibold text-xs text-slate-900">
+                    <span className="font-bold text-xs text-slate-950">
                       {poly.code}
                     </span>
-                    {isSelected && <CheckCircle2 className="w-4 h-4 text-teal-600 shrink-0 font-semibold" />}
+                    {isSelected && <CheckCircle2 className="w-4 h-4 text-teal-700 shrink-0 font-bold" />}
                   </div>
-                  <span className="text-[11px] text-slate-500 font-normal truncate block mt-1">
+                  <span className="text-[11px] text-slate-600 font-medium truncate block mt-1">
                     {poly.name.split(' ')[0]}
                   </span>
                 </button>
@@ -204,29 +240,29 @@ export const ScanScreen: React.FC<ScanScreenProps> = ({
           </div>
 
           {/* Selected Polymer Detailed Box */}
-          <div className="p-4 rounded-2xl border space-y-3 shadow-xs bg-white border-slate-200 text-slate-900">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-2.5 gap-2">
-              <span className="font-semibold text-sm truncate text-slate-900">
+          <div className="p-4 rounded-3xl border space-y-3 shadow-xs bg-white border-slate-300 text-slate-950">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-2.5 gap-2">
+              <span className="font-bold text-sm truncate text-slate-950">
                 {selectedPolymer.code} — {selectedPolymer.name}
               </span>
-              <span className="text-xs font-semibold text-white bg-teal-700 px-2.5 py-1 rounded-full whitespace-nowrap shrink-0 shadow-xs">
+              <span className="text-xs font-bold text-white bg-teal-700 px-2.5 py-1 rounded-full whitespace-nowrap shrink-0 shadow-xs">
                 {selectedPolymer.price}
               </span>
             </div>
 
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
-              <strong className="text-slate-900 font-medium">Exemples :</strong> {selectedPolymer.examples}
+            <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-normal">
+              <strong className="text-slate-950 font-bold">Exemples :</strong> {selectedPolymer.examples}
             </p>
 
-            <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-900 font-normal flex items-start gap-2 shadow-xs">
-              <AlertTriangle className="w-4.5 h-4.5 text-rose-600 shrink-0 mt-0.5" />
+            <div className="p-3 rounded-2xl bg-rose-50 border border-rose-200 text-xs text-rose-950 font-medium flex items-start gap-2 shadow-xs">
+              <AlertTriangle className="w-4.5 h-4.5 text-rose-700 shrink-0 mt-0.5" />
               <span>{selectedPolymer.impact}</span>
             </div>
 
             <button
               type="button"
               onClick={() => setMobileScreen('report')}
-              className="w-full h-11 px-4 rounded-xl bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 active:scale-95 text-white text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer whitespace-nowrap shadow-md"
+              className="w-full h-11 px-4 rounded-2xl bg-gradient-to-r from-teal-700 to-emerald-700 hover:from-teal-800 hover:to-emerald-800 active:scale-95 text-white text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all cursor-pointer whitespace-nowrap shadow-md"
             >
               <span className="whitespace-nowrap">Signaler ce type de plastique</span>
               <ArrowRight className="w-4 h-4 shrink-0" />

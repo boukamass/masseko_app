@@ -223,11 +223,11 @@ export const ImpactScreen: React.FC<ImpactScreenProps> = ({
         {/* Progress distribution bar */}
         <div className="space-y-1.5">
           <div className="w-full h-3 rounded-full overflow-hidden flex bg-slate-100">
-            <div style={{ width: '38%' }} className="bg-emerald-500 h-full" title="Étudiants & Écoles : 38%" />
-            <div style={{ width: '24%' }} className="bg-sky-500 h-full" title="Pêcheurs Artisanaux : 24%" />
-            <div style={{ width: '18%' }} className="bg-amber-500 h-full" title="Professionnels du Littoral : 18%" />
-            <div style={{ width: '12%' }} className="bg-teal-600 h-full" title="Citoyens Sentinelles : 12%" />
-            <div style={{ width: '8%' }} className="bg-purple-500 h-full" title="ONG & Scientifiques : 8%" />
+            <div style={{ width: '38%' }} className="bg-emerald-500 h-full" aria-label="Étudiants & Écoles : 38%" />
+            <div style={{ width: '24%' }} className="bg-sky-500 h-full" aria-label="Pêcheurs Artisanaux : 24%" />
+            <div style={{ width: '18%' }} className="bg-amber-500 h-full" aria-label="Professionnels du Littoral : 18%" />
+            <div style={{ width: '12%' }} className="bg-teal-600 h-full" aria-label="Citoyens Sentinelles : 12%" />
+            <div style={{ width: '8%' }} className="bg-purple-500 h-full" aria-label="ONG & Scientifiques : 8%" />
           </div>
 
           <div className="grid grid-cols-2 gap-2 pt-1 text-[11px]">
